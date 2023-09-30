@@ -16,3 +16,5 @@ local.properties
 /.idea
 
 /app/src/main/res/xml/data_extraction_rules.xml
+/buildSrc/build/libs/buildSrc.jar
+/buildSrc/build/tmp/jar/MANIFEST.MF
