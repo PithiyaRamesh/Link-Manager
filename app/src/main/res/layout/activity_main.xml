@@ -6,13 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.HomeActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerTabs"
+        android:layout_width="match_parent"
+        android:paddingTop="2dp"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:background="@color/colorLightGray"
+        android:orientation="horizontal"
+        tools:listitem="@layout/item_link_collection"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:itemCount="8" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

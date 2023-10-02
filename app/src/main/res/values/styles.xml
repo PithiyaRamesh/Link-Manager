@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Medium" parent="Widget.AppCompat.TextView">
+        <item name="fontFamily">@font/uber_move_medium</item>
+    </style>
+    <style name="Medium.Black" >
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="Medium.Black.18">
+        <item name="android:textSize">18sp</item>
+    </style>
+</resources>
