@@ -54,7 +54,7 @@ class TabsRecyclerAdapter(val callback: CollectionCallback) :
         currentSelection = position
         notifyItemChanged(oldSelection)
         notifyItemChanged(currentSelection)
-        callback.onItemSelectionChanged(mListAttached[position])
+        callback.onItemSelectionChanged(mListAttached[position-1])
     }
 
 
@@ -68,6 +68,10 @@ class TabsRecyclerAdapter(val callback: CollectionCallback) :
         mListAttached.add(if (itemCount > 1) itemCount - 1 else 0, item)
         notifyItemInserted(itemCount - 2)
         notifyItemChanged(itemCount - 1)
+    }
+
+    fun getList(): ArrayList<TabsModel> {
+        return mListAttached
     }
 
     fun removeItem(id: String) {

@@ -9,4 +9,10 @@
     <style name="Medium.Black.18">
         <item name="android:textSize">18sp</item>
     </style>
+
+    <style name="dialogTheme" parent="Base.Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowMinWidthMajor">95%</item>
+        <item name="android:windowMinWidthMinor">95%</item>
+    </style>
 </resources>
