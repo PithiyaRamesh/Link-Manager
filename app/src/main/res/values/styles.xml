@@ -4,14 +4,24 @@
         <item name="fontFamily">@font/uber_move_medium</item>
     </style>
     <style name="Medium.Black" >
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/colorBlackWhite</item>
     </style>
     <style name="Medium.Black.18">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">@dimen/sp_18</item>
+    </style>
+    <style name="Regular" parent="Widget.AppCompat.TextView">
+        <item name="fontFamily">@font/uber_move_regular</item>
+    </style>
+    <style name="Regular.Black" >
+        <item name="android:textColor">@color/colorBlackWhite</item>
+    </style>
+
+    <style name="Regular.Black.16">
+        <item name="android:textSize">@dimen/sp_16</item>
     </style>
 
     <style name="dialogTheme" parent="Base.Theme.AppCompat.Light.Dialog">
-        <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowBackground">@color/colorWhiteBlack</item>
         <item name="android:windowMinWidthMajor">95%</item>
         <item name="android:windowMinWidthMinor">95%</item>
     </style>

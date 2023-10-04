@@ -43,10 +43,10 @@ class AppPreferences private constructor() {
         }
     }
 
-    var tabs: ArrayList<TabsModel>
+    var tabs: ArrayList<TabsModel>?
         get() = gson.fromJson(getString(Keys.LINK_COLLECTION), object : TypeToken<ArrayList<TabsModel>>(){}.type)
         set(value) {
-            putStringSet(Keys.LINK_COLLECTION, gson.toJson(value.toSet()))
+            putStringSet(Keys.LINK_COLLECTION, gson.toJson(value?.toSet()))
         }
 
     object Keys {

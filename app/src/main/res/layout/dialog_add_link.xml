@@ -4,32 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhiteBlack"
     tools:context=".ui.activity.HomeActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerTabs"
         android:layout_width="match_parent"
+        android:paddingTop="2dp"
         android:layout_height="wrap_content"
         android:background="@color/statusBarColor"
         android:orientation="horizontal"
-        android:paddingTop="2dp"
+        tools:listitem="@layout/item_link_collection"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toTopOf="parent"
-        tools:itemCount="8"
-        tools:listitem="@layout/item_link_collection" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerLinks"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@color/colorWhiteBlack"
-        android:orientation="vertical"
-        android:paddingTop="2dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/recyclerTabs"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:itemCount="8"
-        tools:listitem="@layout/item_link" />
+        tools:itemCount="8" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

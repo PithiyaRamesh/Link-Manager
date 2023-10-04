@@ -7,6 +7,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.redvings.linkmanager.databinding.ItemLinkCollectionBinding
 import com.redvings.linkmanager.models.TabsModel
+import com.redvings.linkmanager.utils.Utils.eLog
 
 class TabsRecyclerAdapter(val callback: CollectionCallback) :
     RecyclerView.Adapter<TabsRecyclerAdapter.ViewHolder>() {
@@ -34,13 +35,24 @@ class TabsRecyclerAdapter(val callback: CollectionCallback) :
                 onItemSelectionChanged(adapterPosition)
             }
             binding.imageAddItem.setOnClickListener {
+                val wasEmpty = mListAttached.isEmpty()
                 callback.onAddItemClicked()
+                if (wasEmpty) {
+                    eLog("wasEmpty:::$adapterPosition")
+                    callback.onItemSelectionChanged(mListAttached[adapterPosition - 1])
+                }
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(ItemLinkCollectionBinding.inflate(LayoutInflater.from(parent.context)))
+        return ViewHolder(
+            ItemLinkCollectionBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun getItemCount() = mListAttached.size + 1
@@ -54,7 +66,7 @@ class TabsRecyclerAdapter(val callback: CollectionCallback) :
         currentSelection = position
         notifyItemChanged(oldSelection)
         notifyItemChanged(currentSelection)
-        callback.onItemSelectionChanged(mListAttached[position-1])
+        callback.onItemSelectionChanged(mListAttached[position])
     }
 
 
@@ -62,6 +74,9 @@ class TabsRecyclerAdapter(val callback: CollectionCallback) :
         val oldSize = itemCount
         mListAttached.addAll(list)
         notifyItemRangeInserted(oldSize, itemCount)
+        if (oldSize - 1 <= 0 && mListAttached.size > 0) {
+            callback.onItemSelectionChanged(list[0])
+        }
     }
 
     fun addItem(item: TabsModel) {

@@ -5,7 +5,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:paddingHorizontal="14dp"
-    android:layout_margin="8dp"
     android:orientation="horizontal"
     android:minHeight="42dp"
     android:backgroundTint="@color/selector_color_tab_bg"
@@ -31,6 +30,7 @@
         android:layout_marginStart="2dp"
         android:layout_gravity="center_vertical"
         android:visibility="gone"
+        android:tint="@color/colorBlackWhite"
         android:layout_marginEnd="4dp"
         android:padding="3dp"
         app:srcCompat="@drawable/ic_plus" />
