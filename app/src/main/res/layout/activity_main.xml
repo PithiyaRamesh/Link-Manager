@@ -24,12 +24,41 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@color/colorWhiteBlack"
+        android:clipToPadding="false"
         android:orientation="vertical"
         android:paddingTop="2dp"
+        android:paddingBottom="@dimen/dp_70"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/recyclerTabs"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recyclerTabs"
         tools:itemCount="8"
         tools:listitem="@layout/item_link" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:minHeight="@dimen/dp_60"
+        android:background="@drawable/bottom_navigation"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/btnAddLink"
+        android:layout_width="@dimen/dp_55"
+        android:layout_height="@dimen/dp_55"
+        android:background="@drawable/bg_blue_circle"
+        android:contentDescription="@string/add_link_to_collection"
+        app:contentPadding="@dimen/dp_12"
+        app:layout_constraintBottom_toTopOf="@id/constraintNavigation"
+        app:layout_constraintTop_toTopOf="@id/constraintNavigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Circular"
+        app:srcCompat="@drawable/ic_plus"
+        app:tint="@color/colorWhiteBlack" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

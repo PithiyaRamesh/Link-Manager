@@ -3,5 +3,14 @@
     <color name="colorBlackWhite">#FF000000</color>
     <color name="colorWhiteBlack">#FFFFFFFF</color>
     <color name="colorWhiteBlackLight">#FFFFFFFF</color>
+    <color name="colorWhiteBlack31">#FFFFFFFF</color>
     <color name="statusBarColor">#EFEEEE</color>
+    <color name="colorBlue1CC1FF">#1CC1FF</color>
+    <color name="colorWhite50Black50">#80F5F5F5</color>
+    <color name="colorHintFloating">#80000000</color>
+    <color name="colorHintEditText">#80000000</color>
+    <color name="colorBGTextInputLayout">#F5F5F5</color>
+    <color name="colorTextView2">#323232</color>
+    <color name="colorGreenGray88">#888888</color>
+    <color name="colorBlueBlack15">#26000000</color>
 </resources>
