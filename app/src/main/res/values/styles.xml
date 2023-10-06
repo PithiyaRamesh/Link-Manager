@@ -87,4 +87,9 @@
     <style name="buttonBlueBlack15" parent="buttonBlue">
         <item name="android:background">@drawable/bg_blue_black15_round_corners</item>
     </style>
+
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/zoom_in</item>
+        <item name="android:windowExitAnimation">@anim/zoom_out</item>
+    </style>
 </resources>

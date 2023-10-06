@@ -97,6 +97,10 @@ class TabsRecyclerAdapter(val callback: CollectionCallback) :
         }
     }
 
+    fun getSelectedCollection(): TabsModel {
+        return mListAttached[currentSelection]
+    }
+
     interface CollectionCallback {
         fun onItemSelectionChanged(item: TabsModel)
         fun onAddItemClicked()

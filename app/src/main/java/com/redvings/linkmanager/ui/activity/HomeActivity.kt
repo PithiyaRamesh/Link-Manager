@@ -1,24 +1,21 @@
 package com.redvings.linkmanager.ui.activity
 
 import android.os.Bundle
-import android.view.View
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.redvings.linkmanager.base.BaseActivity
 import com.redvings.linkmanager.databinding.ActivityMainBinding
-import com.redvings.linkmanager.databinding.DialogAddLinkBinding
 import com.redvings.linkmanager.models.LinkModel
 import com.redvings.linkmanager.models.TabsModel
 import com.redvings.linkmanager.ui.adapters.LinksRecyclerAdapter
 import com.redvings.linkmanager.ui.adapters.TabsRecyclerAdapter
+import com.redvings.linkmanager.ui.dialogs.AddLinkDialog
 import com.redvings.linkmanager.utils.Utils.eLog
-import com.redvings.linkmanager.utils.Utils.inflateBinding
-import java.util.ArrayList
 
 class HomeActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private val linksRecyclerCallback by lazy {
-        object : LinksRecyclerAdapter.CollectionCallback{
+        object : LinksRecyclerAdapter.CollectionCallback {
             override fun onItemClicked(item: LinkModel) {
                 eLog("onItemClicked: $item")
             }
@@ -66,14 +63,15 @@ class HomeActivity : BaseActivity() {
 
     private fun setClicks() {
         binding.btnAddLink.setOnClickListener {
-            showAddLinkDialog()
+            showAddLinkDialog(tabsRecyclerAdapter.getSelectedCollection())
         }
     }
 
-    private fun showAddLinkDialog() {
-        showFragmentDialog(inflateBinding<DialogAddLinkBinding>()){dBining, aleart->
-            aleart.show()
-        }
+    private fun showAddLinkDialog(collection: TabsModel) {
+        AddLinkDialog(collection.name ?: "") {
+            collection.links?.add(it)
+            linksRecyclerAdapter.notifyItemInserted(linksRecyclerAdapter.itemCount)
+        }.show(supportFragmentManager, "AddLinkDialog")
     }
 
     private fun setTabsRecyclerView() {
