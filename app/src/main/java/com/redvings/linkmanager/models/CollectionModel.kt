@@ -2,7 +2,7 @@ package com.redvings.linkmanager.models
 
 import com.google.gson.annotations.SerializedName
 
-data class TabsModel(
+data class CollectionModel(
     @SerializedName("id")
     var id: String?,
     @SerializedName("name")

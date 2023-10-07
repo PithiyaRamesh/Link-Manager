@@ -44,13 +44,13 @@ class LinksRecyclerAdapter(val callback: CollectionCallback) :
         holder.bindData(mListAttached[position])
     }
 
-    fun replaceList(list: ArrayList<LinkModel>?) {
-        if (list.isNullOrEmpty()) {
-            mListAttached.clear()
-        } else {
-            mListAttached = list
-        }
+    fun replaceList(list: ArrayList<LinkModel>) {
+        mListAttached = list
         notifyChangeAll()
+    }
+    fun addItem(item: LinkModel) {
+        mListAttached.add(item)
+        notifyItemInserted(itemCount)
     }
 
     fun getList(): ArrayList<LinkModel> {

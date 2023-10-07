@@ -6,12 +6,13 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.redvings.linkmanager.databinding.ItemLinkCollectionBinding
-import com.redvings.linkmanager.models.TabsModel
+import com.redvings.linkmanager.models.CollectionModel
 import com.redvings.linkmanager.utils.Utils.eLog
 
 class TabsRecyclerAdapter(val callback: CollectionCallback) :
     RecyclerView.Adapter<TabsRecyclerAdapter.ViewHolder>() {
-    private val mListAttached = arrayListOf<TabsModel>()
+    private val mListAttached = arrayListOf<CollectionModel>()
+    private inline val size get() = mListAttached.size
     private var currentSelection = 0
 
     inner class ViewHolder(private val binding: ItemLinkCollectionBinding) :
@@ -35,12 +36,7 @@ class TabsRecyclerAdapter(val callback: CollectionCallback) :
                 onItemSelectionChanged(adapterPosition)
             }
             binding.imageAddItem.setOnClickListener {
-                val wasEmpty = mListAttached.isEmpty()
                 callback.onAddItemClicked()
-                if (wasEmpty) {
-                    eLog("wasEmpty:::$adapterPosition")
-                    callback.onItemSelectionChanged(mListAttached[adapterPosition - 1])
-                }
             }
         }
     }
@@ -70,22 +66,26 @@ class TabsRecyclerAdapter(val callback: CollectionCallback) :
     }
 
 
-    fun addList(list: List<TabsModel>) {
-        val oldSize = itemCount
+    fun addList(list: List<CollectionModel>) {
+        val oldSize = size
         mListAttached.addAll(list)
-        notifyItemRangeInserted(oldSize, itemCount)
-        if (oldSize - 1 <= 0 && mListAttached.size > 0) {
+        notifyItemRangeInserted(oldSize, size)
+        if (oldSize <= 0 && size > 0) { // Notify for first item entry
             callback.onItemSelectionChanged(list[0])
         }
     }
 
-    fun addItem(item: TabsModel) {
-        mListAttached.add(if (itemCount > 1) itemCount - 1 else 0, item)
-        notifyItemInserted(itemCount - 2)
-        notifyItemChanged(itemCount - 1)
+    fun addItem(item: CollectionModel) {
+        val oldSize = size
+        mListAttached.add(size, item)
+        if (oldSize < 0 && size > 0) { // Notify for first item entry
+            callback.onItemSelectionChanged(mListAttached[0])
+        }
+        notifyItemInserted(size - 1)
+        notifyItemChanged(itemCount)
     }
 
-    fun getList(): ArrayList<TabsModel> {
+    fun getList(): ArrayList<CollectionModel> {
         return mListAttached
     }
 
@@ -97,12 +97,12 @@ class TabsRecyclerAdapter(val callback: CollectionCallback) :
         }
     }
 
-    fun getSelectedCollection(): TabsModel {
-        return mListAttached[currentSelection]
+    fun getSelectedCollection(): CollectionModel? {
+        return if (size <= 0) null else mListAttached[currentSelection]
     }
 
     interface CollectionCallback {
-        fun onItemSelectionChanged(item: TabsModel)
+        fun onItemSelectionChanged(item: CollectionModel)
         fun onAddItemClicked()
     }
 }

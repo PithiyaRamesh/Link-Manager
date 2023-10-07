@@ -9,13 +9,11 @@ import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.Window
-import androidx.annotation.StringRes
-import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.DialogFragment
-import com.google.android.material.textfield.TextInputLayout
 import com.redvings.linkmanager.R
 import com.redvings.linkmanager.databinding.DialogAddLinkBinding
 import com.redvings.linkmanager.models.LinkModel
+import com.redvings.linkmanager.utils.Utils.checkEmpty
 import com.redvings.linkmanager.utils.Utils.eLog
 import com.redvings.linkmanager.utils.Utils.inflateBinding
 import com.redvings.linkmanager.utils.Utils.safely
@@ -52,16 +50,21 @@ class AddLinkDialog(private val title: String, private val callback: (LinkModel)
 
     private fun setUp() {
         binding?.apply {
+            btnSave.isEnabled = false
             tvTitle.setTextFormatted(R.string.text_add_to_holder, title)
             layoutTitle.setEmptyCheck(R.string.msg_please_enter_title)
             layoutDescription.setEmptyCheck(R.string.msg_please_enter_description)
             layoutLink.setEmptyCheck(R.string.msg_please_enter_link)
 
+            checkEmpty(layoutTitle, layoutLink, layoutDescription) {
+                btnSave.isEnabled = it
+            }
+
             btnSave.setOnClickListener {
-                safely {
+                /*safely {
                     layoutTitle.validate()
                     layoutLink.validate()
-                    layoutDescription.validate()
+                    layoutDescription.validate()*/
 
                     callback(
                         LinkModel(
@@ -72,7 +75,7 @@ class AddLinkDialog(private val title: String, private val callback: (LinkModel)
                         )
                     )
                     this@AddLinkDialog.dismiss()
-                }
+//                }
 
             }
             btnCancel.setOnClickListener {

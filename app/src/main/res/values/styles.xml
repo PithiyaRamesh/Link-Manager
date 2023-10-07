@@ -52,6 +52,7 @@
 
     <style name="BaseTextInputEditText" parent="Widget.AppCompat.EditText">
         <item name="android:maxLines">1</item>
+        <item name="errorEnabled">false</item>
         <item name="android:ellipsize">end</item>
         <item name="android:textColor">@color/colorTextView2</item>
         <item name="android:imeOptions">actionNext</item>
@@ -79,13 +80,22 @@
         <item name="android:minHeight">@dimen/dp_35</item>
     </style>
 
-    <style name="buttonBlue" parent="ButtonBase">
+    <style name="buttonPositive" parent="ButtonBase">
         <item name="android:textSize">@dimen/sp_16</item>
         <item name="fontFamily">@font/sfpro_display_medium</item>
     </style>
 
-    <style name="buttonBlueBlack15" parent="buttonBlue">
+    <style name="buttonNegative" parent="ButtonBase">
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="fontFamily">@font/sfpro_display_medium</item>
+    </style>
+
+    <style name="buttonBlueBlack15" parent="buttonPositive">
         <item name="android:background">@drawable/bg_blue_black15_round_corners</item>
+    </style>
+
+    <style name="textButton" parent="buttonNegative">
+        <item name="android:background">@null</item>
     </style>
 
     <style name="DialogAnimation">

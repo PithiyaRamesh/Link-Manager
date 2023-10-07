@@ -27,15 +27,36 @@
             tools:text="@string/text_add_to_holder" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/layoutTitle"
+            android:id="@+id/layoutCollectionName"
             style="@style/TextInputLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_20"
-            android:hint="@string/hint_title"
+            android:visibility="gone"
+            android:hint="@string/hint_collection_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvTitle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtCollectionName"
+                style="@style/BaseTextInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutTitle"
+            style="@style/TextInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/edtMarginTop"
+            app:layout_goneMarginTop="@dimen/dp_20"
+            android:hint="@string/hint_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layoutCollectionName">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edtTitle"
@@ -50,7 +71,7 @@
             style="@style/TextInputLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginTop="@dimen/edtMarginTop"
             android:hint="@string/hint_link"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -69,7 +90,7 @@
             style="@style/TextInputLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginTop="@dimen/edtMarginTop"
             android:gravity="top"
             android:hint="@string/hint_description"
             app:layout_constraintEnd_toEndOf="parent"
@@ -98,9 +119,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/layoutDescription" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnCancel"
-            style="@style/Medium.Black.18"
+            style="@style/textButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/dp_16"

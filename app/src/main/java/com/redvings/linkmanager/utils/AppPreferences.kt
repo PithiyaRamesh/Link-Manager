@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import androidx.core.content.edit
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.redvings.linkmanager.models.TabsModel
+import com.redvings.linkmanager.models.CollectionModel
 
 class AppPreferences private constructor() {
     private val gson: Gson = Gson()
@@ -43,8 +43,8 @@ class AppPreferences private constructor() {
         }
     }
 
-    var tabs: ArrayList<TabsModel>?
-        get() = gson.fromJson(getString(Keys.LINK_COLLECTION), object : TypeToken<ArrayList<TabsModel>>(){}.type)
+    var tabs: ArrayList<CollectionModel>?
+        get() = gson.fromJson(getString(Keys.LINK_COLLECTION), object : TypeToken<ArrayList<CollectionModel>>(){}.type)
         set(value) {
             putStringSet(Keys.LINK_COLLECTION, gson.toJson(value?.toSet()))
         }

@@ -17,13 +17,14 @@ object Utils {
         val tag = "LinkManager==>${this::class.java.simpleName}"
         Log.e(tag, msg)
     }
+
     inline fun <reified T : ViewBinding> Context.inflateBinding(): T {
         val inflateMethod = T::class.java.getMethod("inflate", LayoutInflater::class.java)
         return inflateMethod.invoke(null, LayoutInflater.from(this)) as T
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun RecyclerView.Adapter<*>.notifyChangeAll(){
+    fun RecyclerView.Adapter<*>.notifyChangeAll() {
         this.notifyDataSetChanged()
     }
 
@@ -34,12 +35,23 @@ object Utils {
     fun EditText.stringText(trim: Boolean = true) =
         if (trim) text.toString().trim() else text.toString()
 
-   inline val EditText.isBlank get() = text.toString().isBlank()
-   inline val EditText.isNotBlank get() = text.toString().isNotBlank()
+    inline val EditText.isBlank get() = text.toString().isBlank()
+    inline val EditText?.isNullBlank get() = this?.text?.toString().isNullOrBlank()
+    inline val EditText.isNotBlank get() = text.toString().isNotBlank()
+    inline val EditText?.isNotNullBlank get() = this?.text?.toString().isNullOrBlank().not()
+    inline val TextInputLayout.isNotNullBlank
+        get() = this.editText?.text?.toString().isNullOrBlank().not()
+    inline val TextInputLayout.isNullBlank get() = this.editText?.text?.toString().isNullOrBlank()
 
     fun TextInputLayout.setEmptyCheck(s: String): TextInputLayout {
         editText?.doAfterTextChanged {
-            error = if (it.isNullOrBlank()) s else null
+            if (it.isNullOrBlank()) {
+                isErrorEnabled = true
+                error = s
+            } else {
+                error = null
+                isErrorEnabled = false
+            }
         }
         return this
     }
@@ -59,6 +71,29 @@ object Utils {
     inline fun safely(action: () -> Unit) {
         try {
             action()
-        } catch (_: Exception) { }
+        } catch (_: Exception) {
+        }
+    }
+
+    fun checkEmpty(vararg textInputLayouts: TextInputLayout, action: (valid: Boolean) -> Unit) {
+        val list: List<TextInputLayout> = textInputLayouts.toList()
+        list.forEach { layout ->
+            layout.editText?.doAfterTextChanged {
+                action(list.all { it.isNotNullBlank })
+            }
+        }
+    }
+
+    fun checkAllEmptyOrAllFilled(
+        vararg textInputLayouts: TextInputLayout,
+        action: (valid: Boolean) -> Unit
+    ) {
+        val list: List<TextInputLayout> = textInputLayouts.toList()
+        list.forEach {
+            it.editText?.doAfterTextChanged {
+                val valid = list.all { it.isNullBlank } || list.all { it.isNotNullBlank }
+                action(valid)
+            }
+        }
     }
 }

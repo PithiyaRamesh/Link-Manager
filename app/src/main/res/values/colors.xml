@@ -12,5 +12,6 @@
     <color name="colorBGTextInputLayout">#F5F5F5</color>
     <color name="colorTextView2">#323232</color>
     <color name="colorGreenGray88">#888888</color>
-    <color name="colorBlueBlack15">#26000000</color>
+    <color name="colorButtonEnabled">#40000000</color>
+    <color name="colorButtonDisabled">#0D000000</color>
 </resources>

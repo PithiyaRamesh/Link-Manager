@@ -465,4 +465,6 @@
     <dimen name="mdp_69">-69dp</dimen>
     <dimen name="mdp_70">-70dp</dimen>
     <dimen name="mdp_100">-100dp</dimen>
+
+    <dimen name="edtMarginTop">12dp</dimen>
 </resources>

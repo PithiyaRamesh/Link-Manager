@@ -10,4 +10,7 @@
     <string name="msg_please_enter_title">Please enter title</string>
     <string name="msg_please_enter_description">Please enter description</string>
     <string name="msg_please_enter_link">Please enter link</string>
+    <string name="hint_collection_name">Collection name</string>
+    <string name="text_add_collection">Add collection</string>
+    <string name="msg_please_enter_collection_name">Please enter collection name</string>
 </resources>
