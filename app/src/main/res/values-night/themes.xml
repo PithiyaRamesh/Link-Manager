@@ -10,7 +10,7 @@
     <style name="Theme.LinkManager" parent="Base.Theme.LinkManager" />
 
     <style name="Theme.LinkManager.Splash" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/colorWhiteBlack</item>
+        <item name="windowSplashScreenBackground">@color/colorBgLayouts</item>
         <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher_round</item>
         <item name="windowSplashScreenAnimationDuration">0</item>
         <item name="splashScreenIconSize">6dp</item>

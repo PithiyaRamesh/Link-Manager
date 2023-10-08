@@ -13,4 +13,7 @@
     <string name="hint_collection_name">Collection name</string>
     <string name="text_add_collection">Add collection</string>
     <string name="msg_please_enter_collection_name">Please enter collection name</string>
+    <string name="text_home">Home</string>
+    <string name="text_settings">Settings</string>
+    <string name="text_appearance">Appearance</string>
 </resources>

@@ -467,4 +467,5 @@
     <dimen name="mdp_100">-100dp</dimen>
 
     <dimen name="edtMarginTop">12dp</dimen>
+    <dimen name="toolbarHeight">50dp</dimen>
 </resources>

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorBlackWhite">#FFFFFF</color>
-    <color name="colorWhiteBlack">#0E0F10</color>
-    <color name="colorWhiteBlackLight">#151718</color>
+    <color name="colorBgLayouts">#242729</color>
+    <color name="colorWhiteBlack">#000000</color>
+    <color name="colorWhiteBlackLight">#292C2D</color>
     <color name="colorWhiteBlack31">#4F4F4F</color>
     <color name="statusBarColor">#151718</color>
     <color name="colorWhite50Black50">#80000000</color>
@@ -10,7 +11,8 @@
     <color name="colorHintEditText">#BEBEBF</color>
     <color name="colorBGTextInputLayout">#232323</color>
     <color name="colorTextView2">#F5F5F5</color>
-    <color name="colorGreenGray88">#5DCA73</color>
+    <color name="colorGray88Green">#5DCA73</color>
+    <color name="colorLightGrayGray88">#888888</color>
     <color name="colorButtonEnabled">#1CC1FF</color>
     <color name="colorButtonDisabled">#801CC1FF</color>
 </resources>

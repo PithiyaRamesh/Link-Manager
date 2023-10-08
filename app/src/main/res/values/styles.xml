@@ -13,6 +13,15 @@
         <item name="android:textSize">@dimen/sp_18</item>
     </style>
 
+    <style name="Medium.Black.16">
+        <item name="android:textSize">@dimen/sp_16</item>
+    </style>
+
+    <style name="Medium.Black.Navigation">
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textColor">@color/colorBlackWhite</item>
+    </style>
+
     <style name="Regular" parent="Widget.AppCompat.TextView">
         <item name="fontFamily">@font/sf_pro_text_regular</item>
     </style>
@@ -25,8 +34,14 @@
         <item name="android:textSize">@dimen/sp_16</item>
     </style>
 
+    <style name="Regular.Black.SettingsItem">
+        <item name="android:paddingTop">@dimen/dp_6</item>
+        <item name="android:paddingBottom">@dimen/dp_6</item>
+        <item name="android:textSize">@dimen/sp_16</item>
+    </style>
+
     <style name="dialogTheme" parent="Base.Theme.AppCompat.Light.Dialog">
-        <item name="android:windowBackground">@color/colorWhiteBlack</item>
+        <item name="android:windowBackground">@color/colorBgLayouts</item>
         <item name="android:windowMinWidthMajor">95%</item>
         <item name="android:windowMinWidthMinor">95%</item>
     </style>

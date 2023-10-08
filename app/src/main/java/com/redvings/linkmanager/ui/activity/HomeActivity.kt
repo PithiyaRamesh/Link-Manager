@@ -1,5 +1,6 @@
 package com.redvings.linkmanager.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.redvings.linkmanager.base.BaseActivity
@@ -62,6 +63,10 @@ class HomeActivity : BaseActivity() {
             } else {
                 showAddLinkDialog(collection)
             }
+        }
+
+        binding.llSettings.setOnClickListener {
+            startActivity(Intent(this, SettingsActivity::class.java))
         }
     }
 
