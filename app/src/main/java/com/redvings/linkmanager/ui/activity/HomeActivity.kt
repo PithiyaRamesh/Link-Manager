@@ -2,15 +2,18 @@ package com.redvings.linkmanager.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.redvings.linkmanager.base.BaseActivity
 import com.redvings.linkmanager.databinding.ActivityMainBinding
-import com.redvings.linkmanager.models.LinkModel
 import com.redvings.linkmanager.models.CollectionModel
+import com.redvings.linkmanager.models.LinkModel
 import com.redvings.linkmanager.ui.adapters.LinksRecyclerAdapter
 import com.redvings.linkmanager.ui.adapters.TabsRecyclerAdapter
 import com.redvings.linkmanager.ui.dialogs.AddCollectionDialog
 import com.redvings.linkmanager.ui.dialogs.AddLinkDialog
+import com.redvings.linkmanager.utils.AppPreferences.Keys
 import com.redvings.linkmanager.utils.Utils.eLog
 
 class HomeActivity : BaseActivity() {
@@ -47,6 +50,12 @@ class HomeActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(
+            preferences.getInt(
+                Keys.SELECTED_APPEARANCE,
+                MODE_NIGHT_FOLLOW_SYSTEM
+            )
+        )
         installSplashScreen()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -80,7 +89,7 @@ class HomeActivity : BaseActivity() {
     private fun showAddLinkDialog(collection: CollectionModel) {
         AddLinkDialog(collection.name ?: "") {
             collection.links?.add(it) //will reflect in session and so in current list of adapter
-            linksRecyclerAdapter.notifyItemInserted(linksRecyclerAdapter.itemCount-1)
+            linksRecyclerAdapter.notifyItemInserted(linksRecyclerAdapter.itemCount - 1)
         }.show(supportFragmentManager, "AddLinkDialog")
     }
 

@@ -27,24 +27,43 @@ class AppPreferences private constructor() {
         }
     }
 
-    private fun getString(key: String, defValue: String = ""): String {
+    fun getString(key: String, defValue: String = ""): String {
         return sharedPref.getString(key, defValue) ?: ""
     }
 
-    private fun putString(key: String, value: String){
+    fun putString(key: String, value: String) {
         sharedPref.edit {
             putString(key, value)
         }
     }
 
-    private fun putStringSet(key: String, value: String){
+    fun getInt(key: String, defValue: Int): Int {
+        return sharedPref.getInt(key, defValue)
+    }
+
+    fun getInt(key: String): Int? {
+        return if (sharedPreferences?.contains(key) == true) {
+            sharedPref.getInt(key, 0)
+        } else {
+            null
+        }
+    }
+
+    fun putInt(key: String, value: Int) {
+        sharedPref.edit { putInt(key, value) }
+    }
+
+    private fun putStringSet(key: String, value: String) {
         sharedPref.edit {
             putString(key, value)
         }
     }
 
     var tabs: ArrayList<CollectionModel>?
-        get() = gson.fromJson(getString(Keys.LINK_COLLECTION), object : TypeToken<ArrayList<CollectionModel>>(){}.type)
+        get() = gson.fromJson(
+            getString(Keys.LINK_COLLECTION),
+            object : TypeToken<ArrayList<CollectionModel>>() {}.type
+        )
         set(value) {
             putStringSet(Keys.LINK_COLLECTION, gson.toJson(value?.toSet()))
         }
@@ -52,5 +71,6 @@ class AppPreferences private constructor() {
     object Keys {
         const val SHARED_PREF_NAME = "LinkManagerPreferences"
         const val LINK_COLLECTION = "LINK_COLLECTION"
+        const val SELECTED_APPEARANCE = "SELECTED_APPEARANCE"
     }
 }

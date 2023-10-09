@@ -8,6 +8,7 @@
     <color name="statusBarColor">#EFEEEE</color>
     <!--    <color name="statusBarColor">#E1E7F5</color>-->
     <!--    <color name="statusBarColor">#B5B5B5</color>-->
+    <color name="colorDivider">#B5B5B5</color>
     <color name="colorBlue1CC1FF">#1CC1FF</color>
     <color name="colorWhite50Black50">#80F5F5F5</color>
     <color name="colorHintFloating">#80000000</color>

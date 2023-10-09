@@ -29,9 +29,10 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/labelAppearance"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         style="@style/Regular.Black.SettingsItem"
+        app:layout_constraintEnd_toStartOf="@id/labelSelectedAppearance"
         android:text="@string/text_appearance"
         app:layout_constraintStart_toStartOf="@id/guideStart"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
@@ -42,6 +43,7 @@
         android:layout_height="wrap_content"
         style="@style/Regular.Black.SettingsItem"
         tools:text="Dark"
+        android:drawablePadding="@dimen/dp_12"
         app:drawableEndCompat="@drawable/ic_down_arrow"
         app:layout_constraintEnd_toEndOf="@id/guideEnd"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
