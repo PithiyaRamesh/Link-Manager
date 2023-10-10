@@ -14,6 +14,7 @@ import com.redvings.linkmanager.ui.adapters.TabsRecyclerAdapter
 import com.redvings.linkmanager.ui.dialogs.AddCollectionDialog
 import com.redvings.linkmanager.ui.dialogs.AddLinkDialog
 import com.redvings.linkmanager.utils.AppPreferences.Keys
+import com.redvings.linkmanager.utils.Utils
 import com.redvings.linkmanager.utils.Utils.eLog
 
 class HomeActivity : BaseActivity() {
@@ -22,7 +23,12 @@ class HomeActivity : BaseActivity() {
     private val linksRecyclerCallback by lazy {
         object : LinksRecyclerAdapter.CollectionCallback {
             override fun onItemClicked(item: LinkModel) {
-                eLog("onItemClicked: $item")
+                startActivity(
+                    Intent(
+                        this@HomeActivity,
+                        WebViewActivity::class.java
+                    ).also { intent: Intent -> intent.putExtra(Utils.Commons.DATA_BUNDLE, item) }
+                )
             }
         }
     }

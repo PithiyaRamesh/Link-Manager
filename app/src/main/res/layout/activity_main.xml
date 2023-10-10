@@ -38,7 +38,6 @@
         android:id="@+id/constraintNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dp_32"
         android:background="@drawable/bottom_navigation"
         android:visibility="visible"
         android:paddingVertical="@dimen/dp_4"

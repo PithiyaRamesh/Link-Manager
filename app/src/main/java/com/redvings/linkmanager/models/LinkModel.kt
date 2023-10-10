@@ -1,6 +1,7 @@
 package com.redvings.linkmanager.models
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class LinkModel(
     @SerializedName("id")
@@ -11,4 +12,4 @@ data class LinkModel(
     var description: String?,
     @SerializedName("links")
     var link: String?
-)
+): Serializable

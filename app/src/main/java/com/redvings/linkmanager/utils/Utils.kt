@@ -2,6 +2,9 @@ package com.redvings.linkmanager.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.EditText
@@ -11,8 +14,14 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.textfield.TextInputLayout
+import java.io.Serializable
 
 object Utils {
+
+    object Commons {
+        const val DATA_BUNDLE = "DATA_BUNDLE"
+    }
+
     fun Any.eLog(msg: String) {
         val tag = "LinkManager==>${this::class.java.simpleName}"
         Log.e(tag, msg)
@@ -21,6 +30,16 @@ object Utils {
     inline fun <reified T : ViewBinding> Context.inflateBinding(): T {
         val inflateMethod = T::class.java.getMethod("inflate", LayoutInflater::class.java)
         return inflateMethod.invoke(null, LayoutInflater.from(this)) as T
+    }
+
+    fun Context.openLinkInBrowser(link: String) {
+        try {
+            val i = Intent(Intent.ACTION_VIEW)
+            i.data = Uri.parse(link)
+            startActivity(i)
+        } catch (e: Exception) {
+            eLog("Unable to open browser")
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -65,6 +84,15 @@ object Utils {
         if (!error.isNullOrBlank()) {
             editText?.requestFocus()
             throw Exception(error.toString())
+        }
+    }
+
+
+    inline fun <reified T : Serializable?> Intent.getSerializableData(key: String): T? {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            getSerializableExtra(key, T::class.java)
+        } else {
+            getSerializableExtra(key) as? T
         }
     }
 

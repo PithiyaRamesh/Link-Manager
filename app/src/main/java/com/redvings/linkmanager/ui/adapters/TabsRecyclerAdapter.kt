@@ -7,7 +7,6 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.redvings.linkmanager.databinding.ItemLinkCollectionBinding
 import com.redvings.linkmanager.models.CollectionModel
-import com.redvings.linkmanager.utils.Utils.eLog
 
 class TabsRecyclerAdapter(val callback: CollectionCallback) :
     RecyclerView.Adapter<TabsRecyclerAdapter.ViewHolder>() {
@@ -78,11 +77,11 @@ class TabsRecyclerAdapter(val callback: CollectionCallback) :
     fun addItem(item: CollectionModel) {
         val oldSize = size
         mListAttached.add(size, item)
-        if (oldSize < 0 && size > 0) { // Notify for first item entry
+        if (oldSize <= 0 && size > 0) { // Notify for first item entry
             callback.onItemSelectionChanged(mListAttached[0])
         }
         notifyItemInserted(size - 1)
-        notifyItemChanged(itemCount)
+        notifyItemChanged(itemCount - 2)
     }
 
     fun getList(): ArrayList<CollectionModel> {
