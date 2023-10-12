@@ -38,7 +38,7 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
 
     private fun setClicks() {
         binding.toolbar.ivBack.setOnClickListener(this)
-        binding.labelAppearance.setOnClickListener(this)
+//        binding.labelAppearance.setOnClickListener(this)
         binding.labelSelectedAppearance.setOnClickListener(this)
 
         binding.chbxOpenInBrowser.setOnCheckedChangeListener { compoundButton, b ->

@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.redvings.linkmanager.databinding.ItemLinkBinding
+import com.redvings.linkmanager.models.CollectionModel
 import com.redvings.linkmanager.models.LinkModel
 import com.redvings.linkmanager.utils.Utils.notifyChangeAll
 
@@ -48,9 +49,10 @@ class LinksRecyclerAdapter(val callback: CollectionCallback) :
         mListAttached = list
         notifyChangeAll()
     }
-    fun addItem(item: LinkModel) {
-        mListAttached.add(item)
-        notifyItemInserted(itemCount)
+
+    fun addItem(collection: CollectionModel, item: LinkModel) {
+        collection.links?.add(item)
+        notifyItemInserted(itemCount - 1)
     }
 
     fun getList(): ArrayList<LinkModel> {

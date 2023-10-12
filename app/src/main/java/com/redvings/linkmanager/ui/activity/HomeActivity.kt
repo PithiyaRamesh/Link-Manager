@@ -14,7 +14,6 @@ import com.redvings.linkmanager.ui.adapters.TabsRecyclerAdapter
 import com.redvings.linkmanager.ui.dialogs.AddCollectionDialog
 import com.redvings.linkmanager.ui.dialogs.AddLinkDialog
 import com.redvings.linkmanager.utils.AppPreferences.Keys
-import com.redvings.linkmanager.utils.Utils
 import com.redvings.linkmanager.utils.Utils.Commons
 import com.redvings.linkmanager.utils.Utils.eLog
 import com.redvings.linkmanager.utils.Utils.openLinkInBrowser
@@ -32,7 +31,7 @@ class HomeActivity : BaseActivity() {
                             WebViewActivity::class.java
                         ).also { intent: Intent -> intent.putExtra(Commons.DATA_BUNDLE, item) }
                     )
-                }else {
+                } else {
                     item.link?.let { openLinkInBrowser(it) }
                 }
             }
@@ -100,8 +99,8 @@ class HomeActivity : BaseActivity() {
 
     private fun showAddLinkDialog(collection: CollectionModel) {
         AddLinkDialog(collection.name ?: "") {
-            collection.links?.add(it) //will reflect in session and so in current list of adapter
-            linksRecyclerAdapter.notifyItemInserted(linksRecyclerAdapter.itemCount - 1)
+            linksRecyclerAdapter.addItem(collection, it)
+            preferences.tabs = tabsRecyclerAdapter.getList() //Update session list
         }.show(supportFragmentManager, "AddLinkDialog")
     }
 
