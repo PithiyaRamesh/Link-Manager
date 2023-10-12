@@ -6,6 +6,7 @@ import androidx.core.content.edit
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.redvings.linkmanager.models.CollectionModel
+import com.redvings.linkmanager.utils.Utils.Commons.IN_APP
 
 class AppPreferences private constructor() {
     private val gson: Gson = Gson()
@@ -68,9 +69,16 @@ class AppPreferences private constructor() {
             putStringSet(Keys.LINK_COLLECTION, gson.toJson(value?.toSet()))
         }
 
+    var openWith: String
+        get() = getString(Keys.OPEN_WITH, IN_APP)
+        set(value) {
+            putString(Keys.OPEN_WITH, value)
+        }
+
     object Keys {
         const val SHARED_PREF_NAME = "LinkManagerPreferences"
         const val LINK_COLLECTION = "LINK_COLLECTION"
         const val SELECTED_APPEARANCE = "SELECTED_APPEARANCE"
+        const val OPEN_WITH = "OPEN_WITH"
     }
 }

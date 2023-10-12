@@ -9,18 +9,23 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.textfield.TextInputLayout
+import com.redvings.linkmanager.R
 import java.io.Serializable
 
 object Utils {
 
     object Commons {
         const val DATA_BUNDLE = "DATA_BUNDLE"
+        const val IN_APP = "in_app"
     }
+
+    inline val String.httpLink get() = if (startsWith("http")) this else "http://$this"
 
     fun Any.eLog(msg: String) {
         val tag = "LinkManager==>${this::class.java.simpleName}"
@@ -35,9 +40,10 @@ object Utils {
     fun Context.openLinkInBrowser(link: String) {
         try {
             val i = Intent(Intent.ACTION_VIEW)
-            i.data = Uri.parse(link)
+            i.data = Uri.parse(link.httpLink)
             startActivity(i)
         } catch (e: Exception) {
+            Toast.makeText(this, getString(R.string.msg_unable_to_open_link), Toast.LENGTH_SHORT).show()
             eLog("Unable to open browser")
         }
     }

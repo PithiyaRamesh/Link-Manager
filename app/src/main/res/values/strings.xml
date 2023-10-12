@@ -19,4 +19,7 @@
     <string name="text_dark">Dark</string>
     <string name="text_light">Light</string>
     <string name="text_system">System</string>
+    <string name="text_open_link_with_external_browser">Open links with external browser</string>
+    <string name="btn_ok">OK</string>
+    <string name="msg_unable_to_open_link">Unable to open link!</string>
 </resources>

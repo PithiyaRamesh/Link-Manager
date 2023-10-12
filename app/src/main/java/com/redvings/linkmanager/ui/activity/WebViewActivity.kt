@@ -11,6 +11,7 @@ import com.redvings.linkmanager.models.LinkModel
 import com.redvings.linkmanager.utils.Utils.Commons
 import com.redvings.linkmanager.utils.Utils.eLog
 import com.redvings.linkmanager.utils.Utils.getSerializableData
+import com.redvings.linkmanager.utils.Utils.httpLink
 
 class WebViewActivity : BaseActivity() {
     private lateinit var binding: ActivityWebviewBinding
@@ -28,6 +29,9 @@ class WebViewActivity : BaseActivity() {
 
     private fun setup() {
         binding.toolbar.tvTitle.text = linkModel?.name
+        binding.toolbar.ivBack.setOnClickListener {
+            finish()
+        }
         loadUrl(linkModel?.link)
         eLog("loadURL ::: ${linkModel?.link}")
     }
@@ -49,7 +53,7 @@ class WebViewActivity : BaseActivity() {
             webView.settings.userAgentString = "Android WebView"
             webView.settings.setSupportZoom(true)
             showLoader(true)
-            webView.loadUrl(link)
+            webView.loadUrl(link.httpLink)
         }
     }
 }

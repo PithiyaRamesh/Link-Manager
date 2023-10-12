@@ -15,7 +15,9 @@ import com.redvings.linkmanager.ui.dialogs.AddCollectionDialog
 import com.redvings.linkmanager.ui.dialogs.AddLinkDialog
 import com.redvings.linkmanager.utils.AppPreferences.Keys
 import com.redvings.linkmanager.utils.Utils
+import com.redvings.linkmanager.utils.Utils.Commons
 import com.redvings.linkmanager.utils.Utils.eLog
+import com.redvings.linkmanager.utils.Utils.openLinkInBrowser
 
 class HomeActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -23,12 +25,16 @@ class HomeActivity : BaseActivity() {
     private val linksRecyclerCallback by lazy {
         object : LinksRecyclerAdapter.CollectionCallback {
             override fun onItemClicked(item: LinkModel) {
-                startActivity(
-                    Intent(
-                        this@HomeActivity,
-                        WebViewActivity::class.java
-                    ).also { intent: Intent -> intent.putExtra(Utils.Commons.DATA_BUNDLE, item) }
-                )
+                if (preferences.openWith == Commons.IN_APP) {
+                    startActivity(
+                        Intent(
+                            this@HomeActivity,
+                            WebViewActivity::class.java
+                        ).also { intent: Intent -> intent.putExtra(Commons.DATA_BUNDLE, item) }
+                    )
+                }else {
+                    item.link?.let { openLinkInBrowser(it) }
+                }
             }
         }
     }

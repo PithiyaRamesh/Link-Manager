@@ -29,23 +29,40 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/labelAppearance"
+        style="@style/Regular.Black.SettingsItem"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        style="@style/Regular.Black.SettingsItem"
-        app:layout_constraintEnd_toStartOf="@id/labelSelectedAppearance"
         android:text="@string/text_appearance"
+        app:layout_constraintEnd_toStartOf="@id/labelSelectedAppearance"
         app:layout_constraintStart_toStartOf="@id/guideStart"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/labelSelectedAppearance"
+        style="@style/Regular.Black.SettingsItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/Regular.Black.SettingsItem"
-        tools:text="Dark"
         android:drawablePadding="@dimen/dp_12"
         app:drawableEndCompat="@drawable/ic_down_arrow"
         app:layout_constraintEnd_toEndOf="@id/guideEnd"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        tools:text="Dark" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/labelOpenIn"
+        style="@style/Regular.Black.SettingsItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_open_link_with_external_browser"
+        app:layout_constraintStart_toStartOf="@id/guideStart"
+        app:layout_constraintTop_toBottomOf="@id/labelAppearance" />
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/chbxOpenInBrowser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/labelOpenIn"
+        app:layout_constraintEnd_toEndOf="@id/guideEnd"
+        app:layout_constraintTop_toTopOf="@id/labelOpenIn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
