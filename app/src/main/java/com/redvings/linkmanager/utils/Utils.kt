@@ -6,6 +6,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.util.Log
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.widget.EditText
 import android.widget.TextView
@@ -27,6 +28,11 @@ object Utils {
 
     inline val String.httpLink get() = if (startsWith("http")) this else "http://$this"
 
+    inline val CharSequence?.isValidUrl
+        get() = !this.isNullOrBlank() && Patterns.WEB_URL.matcher(
+            this
+        ).matches()
+
     fun Any.eLog(msg: String) {
         val tag = "LinkManager==>${this::class.java.simpleName}"
         Log.e(tag, msg)
@@ -43,7 +49,8 @@ object Utils {
             i.data = Uri.parse(link.httpLink)
             startActivity(i)
         } catch (e: Exception) {
-            Toast.makeText(this, getString(R.string.msg_unable_to_open_link), Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.msg_unable_to_open_link), Toast.LENGTH_SHORT)
+                .show()
             eLog("Unable to open browser")
         }
     }
@@ -83,6 +90,26 @@ object Utils {
 
     fun TextInputLayout.setEmptyCheck(@StringRes id: Int): TextInputLayout {
         return setEmptyCheck(context.getString(id))
+    }
+
+    fun TextInputLayout.checkValidUrl(s: String): TextInputLayout {
+        editText?.doAfterTextChanged {
+            if (it.isNullOrBlank()) {
+                return@doAfterTextChanged
+            }
+            if (it.isValidUrl) {
+                error = null
+                isErrorEnabled = false
+            } else {
+                isErrorEnabled = true
+                error = s
+            }
+        }
+        return this
+    }
+
+    fun TextInputLayout.checkValidUrl(@StringRes id: Int): TextInputLayout {
+        return checkValidUrl(context.getString(id))
     }
 
     fun TextInputLayout.validate() {
@@ -126,6 +153,9 @@ object Utils {
         list.forEach {
             it.editText?.doAfterTextChanged {
                 val valid = list.all { it.isNullBlank } || list.all { it.isNotNullBlank }
+                if (valid) {
+                    list.forEach { edt -> edt.error = null }
+                }
                 action(valid)
             }
         }

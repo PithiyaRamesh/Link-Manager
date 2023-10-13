@@ -17,7 +17,7 @@ import com.redvings.linkmanager.models.CollectionModel
 import com.redvings.linkmanager.models.LinkModel
 import com.redvings.linkmanager.utils.Utils.checkAllEmptyOrAllFilled
 import com.redvings.linkmanager.utils.Utils.checkEmpty
-import com.redvings.linkmanager.utils.Utils.eLog
+import com.redvings.linkmanager.utils.Utils.checkValidUrl
 import com.redvings.linkmanager.utils.Utils.inflateBinding
 import com.redvings.linkmanager.utils.Utils.isNotBlank
 import com.redvings.linkmanager.utils.Utils.isNotNullBlank
@@ -64,17 +64,14 @@ class AddCollectionDialog(private val callback: (CollectionModel) -> Unit) :
             layoutTitle.setEmptyCheck(R.string.msg_please_enter_title)
             layoutDescription.setEmptyCheck(R.string.msg_please_enter_description)
             layoutLink.setEmptyCheck(R.string.msg_please_enter_link)
+            layoutLink.checkValidUrl(R.string.msg_it_doesn_t_look_correct)
+
             checkEmpty(layoutCollectionName) {
                 btnSave.isEnabled = it
             }
 
             checkAllEmptyOrAllFilled(layoutTitle, layoutLink, layoutDescription) {
                 btnSave.isEnabled = it && edtCollectionName.isNotBlank
-                if (it) {
-                    layoutTitle.error = null
-                    layoutLink.error = null
-                    layoutDescription.error = null
-                }
             }
 
             btnSave.setOnClickListener {
@@ -84,7 +81,6 @@ class AddCollectionDialog(private val callback: (CollectionModel) -> Unit) :
                         name = edtCollectionName.stringText(),
                         links = arrayListOf<LinkModel>().apply {
                             if (isLinkDetailsAdded) {
-                                eLog("Link added")
                                 add(
                                     LinkModel(
                                         System.currentTimeMillis().toString(),

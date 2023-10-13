@@ -14,13 +14,11 @@ import com.redvings.linkmanager.R
 import com.redvings.linkmanager.databinding.DialogAddLinkBinding
 import com.redvings.linkmanager.models.LinkModel
 import com.redvings.linkmanager.utils.Utils.checkEmpty
-import com.redvings.linkmanager.utils.Utils.eLog
+import com.redvings.linkmanager.utils.Utils.checkValidUrl
 import com.redvings.linkmanager.utils.Utils.inflateBinding
-import com.redvings.linkmanager.utils.Utils.safely
 import com.redvings.linkmanager.utils.Utils.setEmptyCheck
 import com.redvings.linkmanager.utils.Utils.setTextFormatted
 import com.redvings.linkmanager.utils.Utils.stringText
-import com.redvings.linkmanager.utils.Utils.validate
 
 class AddLinkDialog(private val title: String, private val callback: (LinkModel) -> Unit) :
     DialogFragment() {
@@ -55,6 +53,8 @@ class AddLinkDialog(private val title: String, private val callback: (LinkModel)
             layoutTitle.setEmptyCheck(R.string.msg_please_enter_title)
             layoutDescription.setEmptyCheck(R.string.msg_please_enter_description)
             layoutLink.setEmptyCheck(R.string.msg_please_enter_link)
+            layoutLink.checkValidUrl(R.string.msg_it_doesn_t_look_correct)
+
 
             checkEmpty(layoutTitle, layoutLink, layoutDescription) {
                 btnSave.isEnabled = it
