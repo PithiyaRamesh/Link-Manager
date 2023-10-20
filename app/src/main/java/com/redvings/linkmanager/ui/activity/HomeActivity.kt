@@ -2,6 +2,7 @@ package com.redvings.linkmanager.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -13,6 +14,7 @@ import com.redvings.linkmanager.ui.adapters.LinksRecyclerAdapter
 import com.redvings.linkmanager.ui.adapters.TabsRecyclerAdapter
 import com.redvings.linkmanager.ui.dialogs.AddCollectionDialog
 import com.redvings.linkmanager.ui.dialogs.AddLinkDialog
+import com.redvings.linkmanager.ui.dialogs.LinkOptionsPopup
 import com.redvings.linkmanager.utils.AppPreferences.Keys
 import com.redvings.linkmanager.utils.Utils.Commons
 import com.redvings.linkmanager.utils.Utils.eLog
@@ -23,6 +25,24 @@ class HomeActivity : BaseActivity() {
 
     private val linksRecyclerCallback by lazy {
         object : LinksRecyclerAdapter.CollectionCallback {
+            override fun onOptionsClicked(item: LinkModel, view: View) {
+                LinkOptionsPopup().showPopupWindow(view) {
+                    when (it) {
+                        Commons.EDIT_LINK -> {
+
+                        }
+
+                        Commons.DELETE_LINK -> {
+
+                        }
+
+                        Commons.CHANGE_COLLECTION -> {
+
+                        }
+                    }
+                }
+            }
+
             override fun onItemClicked(item: LinkModel) {
                 if (preferences.openWith == Commons.IN_APP) {
                     startActivity(

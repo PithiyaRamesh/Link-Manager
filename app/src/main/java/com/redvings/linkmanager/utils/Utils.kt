@@ -22,6 +22,10 @@ import java.io.Serializable
 object Utils {
 
     object Commons {
+        const val EDIT_LINK = 0
+        const val DELETE_LINK = 1
+        const val CHANGE_COLLECTION = 2
+
         const val DATA_BUNDLE = "DATA_BUNDLE"
         const val IN_APP = "in_app"
     }

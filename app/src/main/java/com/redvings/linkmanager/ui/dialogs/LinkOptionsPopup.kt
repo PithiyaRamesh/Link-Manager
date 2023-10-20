@@ -1,15 +1,19 @@
 package com.redvings.linkmanager.ui.dialogs
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupWindow
 import androidx.appcompat.app.AppCompatDelegate
-import com.redvings.linkmanager.databinding.PopupAppearanceBinding
+import com.redvings.linkmanager.databinding.PopupLinkEditOptionsBinding
+import com.redvings.linkmanager.utils.Utils
+import com.redvings.linkmanager.utils.Utils.Commons
 
-class AppearancePopup {
+class LinkOptionsPopup {
     var popup: PopupWindow? = null
 
+    @SuppressLint("ClickableViewAccessibility")
     fun showPopupWindow(view: View, callback: (Int) -> Unit) {
         popup = PopupWindow(
             view,
@@ -18,28 +22,26 @@ class AppearancePopup {
             false
         )
 
-        val binding = PopupAppearanceBinding.inflate(LayoutInflater.from(view.context), null, false)
+        val binding =
+            PopupLinkEditOptionsBinding.inflate(LayoutInflater.from(view.context), null, false)
         popup?.contentView = binding.root
         popup?.isOutsideTouchable = true
         popup?.showAsDropDown(view, -5, -5)
 
         //Handler for clicking on the inactive zone of the window
-//        binding.root.setOnTouchListener { v, event -> //Close the window when clicked
-//            popup?.dismiss()
-//            true
-//        }
+        binding.root.setOnTouchListener { v, event -> //Close the window when clicked
+            popup?.dismiss()
+            true
+        }
 
-        binding.tvDark.setOnClickListener {
-            callback(AppCompatDelegate.MODE_NIGHT_YES)
-            popup?.dismiss()
+        binding.tvEdit.setOnClickListener {
+            callback(Commons.EDIT_LINK)
         }
-        binding.tvLight.setOnClickListener {
-            callback(AppCompatDelegate.MODE_NIGHT_NO)
-            popup?.dismiss()
+        binding.tvDelete.setOnClickListener {
+            callback(Commons.DELETE_LINK)
         }
-        binding.tvSystem.setOnClickListener {
-            callback(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-            popup?.dismiss()
+        binding.tvChangeCollection.setOnClickListener {
+            callback(Commons.CHANGE_COLLECTION)
         }
     }
 

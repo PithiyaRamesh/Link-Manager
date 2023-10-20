@@ -23,4 +23,7 @@
     <string name="btn_ok">OK</string>
     <string name="msg_unable_to_open_link">Unable to open link!</string>
     <string name="msg_it_doesn_t_look_correct">It doesn\'t look correct</string>
+    <string name="text_edit">Edit</string>
+    <string name="text_delete">Delete</string>
+    <string name="text_change_collection">Change Collection</string>
 </resources>

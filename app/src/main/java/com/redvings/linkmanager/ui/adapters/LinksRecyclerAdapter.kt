@@ -1,6 +1,7 @@
 package com.redvings.linkmanager.ui.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.redvings.linkmanager.databinding.ItemLinkBinding
@@ -25,6 +26,10 @@ class LinksRecyclerAdapter(val callback: CollectionCallback) :
         init {
             binding.root.setOnClickListener {
                 callback.onItemClicked(mListAttached[adapterPosition])
+            }
+
+            binding.ivLinkOptions.setOnClickListener {
+                callback.onOptionsClicked(mListAttached[adapterPosition], binding.ivLinkOptions)
             }
         }
     }
@@ -69,5 +74,7 @@ class LinksRecyclerAdapter(val callback: CollectionCallback) :
 
     interface CollectionCallback {
         fun onItemClicked(item: LinkModel)
+
+        fun onOptionsClicked(item: LinkModel, view: View)
     }
 }
