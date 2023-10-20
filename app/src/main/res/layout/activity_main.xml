@@ -19,6 +19,16 @@
         tools:itemCount="8"
         tools:listitem="@layout/item_link_collection" />
 
+    <FrameLayout
+        android:id="@+id/banner_ad_top_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recyclerTabs"
+        android:translationZ="2dp">
+    </FrameLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerLinks"
         android:layout_width="match_parent"
@@ -30,7 +40,7 @@
         android:paddingBottom="@dimen/dp_70"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recyclerTabs"
+        app:layout_constraintTop_toBottomOf="@id/banner_ad_top_container"
         tools:itemCount="8"
         tools:listitem="@layout/item_link" />
 

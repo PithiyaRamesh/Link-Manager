@@ -20,4 +20,5 @@
     <!--    <color name="colorLightBlueGray88">#E1E7F5</color>-->
     <color name="colorButtonEnabled">#40000000</color>
     <color name="colorButtonDisabled">#0D000000</color>
+    <color name="colorTransparent">#00000000</color>
 </resources>

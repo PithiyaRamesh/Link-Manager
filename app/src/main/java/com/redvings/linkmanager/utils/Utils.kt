@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
+import android.util.DisplayMetrics
 import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
@@ -13,11 +14,13 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.core.widget.doAfterTextChanged
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.textfield.TextInputLayout
 import com.redvings.linkmanager.R
 import java.io.Serializable
+
 
 object Utils {
 
@@ -28,6 +31,12 @@ object Utils {
 
         const val DATA_BUNDLE = "DATA_BUNDLE"
         const val IN_APP = "in_app"
+    }
+
+    fun FragmentActivity.screenWidth(): Int {
+        val displayMetrics = DisplayMetrics()
+        windowManager.defaultDisplay.getMetrics(displayMetrics)
+        return displayMetrics.widthPixels
     }
 
     inline val String.httpLink get() = if (startsWith("http")) this else "http://$this"
@@ -71,10 +80,7 @@ object Utils {
     fun EditText.stringText(trim: Boolean = true) =
         if (trim) text.toString().trim() else text.toString()
 
-    inline val EditText.isBlank get() = text.toString().isBlank()
-    inline val EditText?.isNullBlank get() = this?.text?.toString().isNullOrBlank()
     inline val EditText.isNotBlank get() = text.toString().isNotBlank()
-    inline val EditText?.isNotNullBlank get() = this?.text?.toString().isNullOrBlank().not()
     inline val TextInputLayout.isNotNullBlank
         get() = this.editText?.text?.toString().isNullOrBlank().not()
     inline val TextInputLayout.isNullBlank get() = this.editText?.text?.toString().isNullOrBlank()
@@ -129,6 +135,7 @@ object Utils {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             getSerializableExtra(key, T::class.java)
         } else {
+            @Suppress("DEPRECATION")
             getSerializableExtra(key) as? T
         }
     }

@@ -45,4 +45,7 @@ dependencies {
 
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.airbnb.android:lottie:6.1.0")
+
+    //Google AdMob
+    implementation("com.google.android.gms:play-services-ads:22.4.0")
 }
