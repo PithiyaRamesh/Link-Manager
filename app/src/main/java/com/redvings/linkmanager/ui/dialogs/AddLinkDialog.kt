@@ -20,7 +20,11 @@ import com.redvings.linkmanager.utils.Utils.setEmptyCheck
 import com.redvings.linkmanager.utils.Utils.setTextFormatted
 import com.redvings.linkmanager.utils.Utils.stringText
 
-class AddLinkDialog(private val title: String, private val callback: (LinkModel) -> Unit) :
+class AddLinkDialog(
+    private val title: String,
+    private var linkModel: LinkModel? = null,
+    private val callback: (LinkModel) -> Unit
+) :
     DialogFragment() {
     var binding: DialogAddLinkBinding? = null
 
@@ -49,7 +53,8 @@ class AddLinkDialog(private val title: String, private val callback: (LinkModel)
     private fun setUp() {
         binding?.apply {
             btnSave.isEnabled = false
-            tvTitle.setTextFormatted(R.string.text_add_to_holder, title)
+            setData(linkModel)
+            tvTitle.text = title
             layoutTitle.setEmptyCheck(R.string.msg_please_enter_title)
             layoutDescription.setEmptyCheck(R.string.msg_please_enter_description)
             layoutLink.setEmptyCheck(R.string.msg_please_enter_link)
@@ -66,21 +71,31 @@ class AddLinkDialog(private val title: String, private val callback: (LinkModel)
                     layoutLink.validate()
                     layoutDescription.validate()*/
 
-                    callback(
-                        LinkModel(
-                            System.currentTimeMillis().toString(),
-                            edtTitle.stringText(),
-                            edtDescription.stringText(),
-                            edtLink.stringText()
-                        )
+                callback(
+                    LinkModel(
+                        System.currentTimeMillis().toString(),
+                        edtTitle.stringText(),
+                        edtDescription.stringText(),
+                        edtLink.stringText()
                     )
-                    this@AddLinkDialog.dismiss()
+                )
+                this@AddLinkDialog.dismiss()
 //                }
 
             }
             btnCancel.setOnClickListener {
                 this@AddLinkDialog.dismiss()
             }
+        }
+    }
+
+    private fun setData(it: LinkModel?) {
+        if (it == null) return
+
+        binding?.apply{
+            edtTitle.setText(it.name)
+            edtLink.setText(it.link)
+            edtDescription.setText(it.description)
         }
     }
 }

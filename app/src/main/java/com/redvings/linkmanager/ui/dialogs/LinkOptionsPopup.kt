@@ -28,20 +28,17 @@ class LinkOptionsPopup {
         popup?.isOutsideTouchable = true
         popup?.showAsDropDown(view, -5, -5)
 
-        //Handler for clicking on the inactive zone of the window
-        binding.root.setOnTouchListener { v, event -> //Close the window when clicked
-            popup?.dismiss()
-            true
-        }
-
         binding.tvEdit.setOnClickListener {
             callback(Commons.EDIT_LINK)
+            popup?.dismiss()
         }
         binding.tvDelete.setOnClickListener {
             callback(Commons.DELETE_LINK)
+            popup?.dismiss()
         }
         binding.tvChangeCollection.setOnClickListener {
             callback(Commons.CHANGE_COLLECTION)
+            popup?.dismiss()
         }
     }
 

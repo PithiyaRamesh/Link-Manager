@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.redvings.linkmanager.databinding.ItemLinkBinding
 import com.redvings.linkmanager.models.CollectionModel
 import com.redvings.linkmanager.models.LinkModel
+import com.redvings.linkmanager.utils.Utils.eLog
 import com.redvings.linkmanager.utils.Utils.notifyChangeAll
 
 class LinksRecyclerAdapter(val callback: CollectionCallback) :
@@ -64,11 +65,21 @@ class LinksRecyclerAdapter(val callback: CollectionCallback) :
         return mListAttached
     }
 
-    fun removeItem(id: String) {
+    fun removeItem(id: String?) {
+        if (id.isNullOrBlank()) return
         val index = mListAttached.indexOfFirst { id == it.id }
         if (index != -1) {
             mListAttached.removeAt(index)
             notifyItemRemoved(index)
+        }
+    }
+    fun updateItem(item: LinkModel) {
+        val index = mListAttached.indexOfFirst { item.id == it.id }
+        if (index != -1) {
+            mListAttached[index] = item
+            notifyItemChanged(index)
+        }else{
+            eLog("LinksRecyclerAdapter: updateItem - invalid index: $item")
         }
     }
 

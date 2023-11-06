@@ -2,6 +2,7 @@ package com.redvings.linkmanager.base
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.redvings.linkmanager.R
 import com.redvings.linkmanager.ui.dialogs.ProgressDialog
 import com.redvings.linkmanager.utils.AppPreferences
@@ -34,6 +35,29 @@ open class BaseActivity : AppCompatActivity() {
             AppCompatDelegate.MODE_NIGHT_YES -> getString(R.string.text_dark)
             else -> getString(R.string.text_system)
         }
+    }
+
+    fun showTwoActionDialog(
+        title: String?,
+        description: String,
+        posText: String,
+        negText: String,
+        positiveClick: () -> Unit
+    ) {
+        MaterialAlertDialogBuilder(this).apply {
+            setPositiveButton(
+                posText
+            ) { dialog, which ->
+                positiveClick()
+                dialog.dismiss()
+            }
+            setNegativeButton(negText) { dialog, which ->
+                dialog.dismiss()
+            }
+        }.create().apply {
+            setTitle(title)
+            setMessage(description)
+        }.show()
     }
 
     fun showLoader(show: Boolean) {

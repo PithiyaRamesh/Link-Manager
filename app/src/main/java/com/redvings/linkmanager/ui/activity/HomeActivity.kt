@@ -35,8 +35,8 @@ class HomeActivity : BaseActivity() {
         AdView(this)
     }
 
-    private val adViewCallbacks by lazy{
-        object : AdListener(){
+    private val adViewCallbacks by lazy {
+        object : AdListener() {
             override fun onAdClicked() {
                 eLog("=====onAdClicked()=====")
             }
@@ -88,11 +88,19 @@ class HomeActivity : BaseActivity() {
                 LinkOptionsPopup().showPopupWindow(view) {
                     when (it) {
                         Commons.EDIT_LINK -> {
-
+                            showEditLinkDialog(item)
                         }
 
                         Commons.DELETE_LINK -> {
-
+                            showTwoActionDialog(
+                                title = null,
+                                "Delete ${item.name}?",
+                                "Delete",
+                                "Cancel"
+                            ) {
+                                linksRecyclerAdapter.removeItem(item.id)
+                                preferences.tabs = tabsRecyclerAdapter.getList()
+                            }
                         }
 
                         Commons.CHANGE_COLLECTION -> {
@@ -178,8 +186,15 @@ class HomeActivity : BaseActivity() {
     }
 
     private fun showAddLinkDialog(collection: CollectionModel) {
-        AddLinkDialog(collection.name ?: "") {
+        AddLinkDialog(getString(R.string.text_add_to_holder, collection.name)) {
             linksRecyclerAdapter.addItem(collection, it)
+            preferences.tabs = tabsRecyclerAdapter.getList() //Update session list
+        }.show(supportFragmentManager, "AddLinkDialog")
+    }
+
+    private fun showEditLinkDialog(linkItem: LinkModel) {
+        AddLinkDialog(getString(R.string.edit_s, linkItem.name), linkItem) {
+            linksRecyclerAdapter.updateItem(it)
             preferences.tabs = tabsRecyclerAdapter.getList() //Update session list
         }.show(supportFragmentManager, "AddLinkDialog")
     }
@@ -200,7 +215,7 @@ class HomeActivity : BaseActivity() {
     }
 
     private fun initAdMob() {
-        MobileAds.initialize(this){
+        MobileAds.initialize(this) {
             eLog("======MobileAds initialization complete======")
         }
 
@@ -209,7 +224,7 @@ class HomeActivity : BaseActivity() {
         binding.bannerAdTopContainer.addView(adViewTop)
 
         binding.bannerAdTopContainer.viewTreeObserver.addOnGlobalLayoutListener {
-            if (isInitialLayout){
+            if (isInitialLayout) {
                 isInitialLayout = false
                 loadTopBannerAd()
             }

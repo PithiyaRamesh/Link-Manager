@@ -27,6 +27,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvEdit"
+                android:layout_width="match_parent"
                 style="@style/PopupItem"
                 android:text="@string/text_edit" />
 
@@ -35,6 +36,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvDelete"
                 style="@style/PopupItem"
+                android:layout_width="match_parent"
                 android:text="@string/text_delete" />
 
             <View style="@style/Divider" />
