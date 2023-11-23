@@ -31,4 +31,5 @@
     <string name="text_change_collection">Change Collection</string>
     <string name="edit_s">Edit %s</string>
     <string name="msg_link_copied_to_clipboard">Link copied to clipboard</string>
+    <string name="text_save">Save</string>
 </resources>

@@ -71,14 +71,18 @@ class AddLinkDialog(
                     layoutLink.validate()
                     layoutDescription.validate()*/
 
-                callback(
-                    LinkModel(
-                        System.currentTimeMillis().toString(),
-                        edtTitle.stringText(),
-                        edtDescription.stringText(),
-                        edtLink.stringText()
-                    )
+               val newLinkModel = linkModel?.apply {
+                    name = edtTitle.stringText()
+                    description = edtDescription.stringText()
+                    link = edtLink.stringText()
+                } ?: LinkModel(
+                    System.currentTimeMillis().toString(),
+                    edtTitle.stringText(),
+                    edtDescription.stringText(),
+                    edtLink.stringText()
                 )
+
+                callback(newLinkModel)
                 this@AddLinkDialog.dismiss()
 //                }
 
