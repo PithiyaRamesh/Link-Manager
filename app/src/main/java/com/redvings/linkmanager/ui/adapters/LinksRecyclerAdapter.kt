@@ -32,6 +32,10 @@ class LinksRecyclerAdapter(val callback: CollectionCallback) :
             binding.ivLinkOptions.setOnClickListener {
                 callback.onOptionsClicked(mListAttached[adapterPosition], binding.ivLinkOptions)
             }
+
+            binding.ivCopyLink.setOnClickListener {
+                callback.onCopyLinkClicked(mListAttached[adapterPosition])
+            }
         }
     }
 
@@ -87,5 +91,6 @@ class LinksRecyclerAdapter(val callback: CollectionCallback) :
         fun onItemClicked(item: LinkModel)
 
         fun onOptionsClicked(item: LinkModel, view: View)
+        fun onCopyLinkClicked(item: LinkModel)
     }
 }

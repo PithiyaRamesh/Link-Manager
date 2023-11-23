@@ -1,6 +1,8 @@
 package com.redvings.linkmanager.utils
 
 import android.annotation.SuppressLint
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -171,5 +173,17 @@ object Utils {
                 action(valid)
             }
         }
+    }
+
+    fun Context.copyToClipboard(text: String) {
+        val clipBoard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipBoard.setPrimaryClip(ClipData.newPlainText("Link manager", text))
+    }
+
+    fun Context.showToast(msg: String){
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+    }
+    fun Context.showToast(@StringRes id: Int){
+        Toast.makeText(this, getString(id), Toast.LENGTH_SHORT).show()
     }
 }

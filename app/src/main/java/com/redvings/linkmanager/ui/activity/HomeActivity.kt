@@ -24,9 +24,11 @@ import com.redvings.linkmanager.ui.dialogs.AddLinkDialog
 import com.redvings.linkmanager.ui.dialogs.LinkOptionsPopup
 import com.redvings.linkmanager.utils.AppPreferences.Keys
 import com.redvings.linkmanager.utils.Utils.Commons
+import com.redvings.linkmanager.utils.Utils.copyToClipboard
 import com.redvings.linkmanager.utils.Utils.eLog
 import com.redvings.linkmanager.utils.Utils.openLinkInBrowser
 import com.redvings.linkmanager.utils.Utils.screenWidth
+import com.redvings.linkmanager.utils.Utils.showToast
 
 class HomeActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -120,6 +122,13 @@ class HomeActivity : BaseActivity() {
                     )
                 } else {
                     item.link?.let { openLinkInBrowser(it) }
+                }
+            }
+
+            override fun onCopyLinkClicked(item: LinkModel) {
+                item.link?.let {
+                    copyToClipboard(it)
+                    showToast(R.string.msg_link_copied_to_clipboard)
                 }
             }
         }
