@@ -106,7 +106,7 @@ class HomeActivity : BaseActivity() {
                         }
 
                         Commons.CHANGE_COLLECTION -> {
-
+                            startActivity(Intent(this@HomeActivity, IsolatedActivity::class.java))
                         }
                     }
                 }
@@ -153,6 +153,10 @@ class HomeActivity : BaseActivity() {
 
     private val linksRecyclerAdapter: LinksRecyclerAdapter by lazy {
         LinksRecyclerAdapter(linksRecyclerCallback)
+    }
+
+    override fun placeHolder(): Int {
+        return 0
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

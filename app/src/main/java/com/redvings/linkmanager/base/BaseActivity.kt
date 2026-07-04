@@ -6,13 +6,16 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.redvings.linkmanager.R
 import com.redvings.linkmanager.ui.dialogs.ProgressDialog
 import com.redvings.linkmanager.utils.AppPreferences
+import com.redvings.linkmanager.utils.Utils.eLog
 
-open class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity() {
     val preferences by lazy { AppPreferences.getInstance(applicationContext) }
 
     private val progressDialog: ProgressDialog by lazy {
         ProgressDialog(this)
     }
+
+    abstract fun placeHolder(): Int
 
     /*    fun <V : ViewBinding> showFragmentDialog(
             dBinding: V,
@@ -68,5 +71,17 @@ open class BaseActivity : AppCompatActivity() {
             if (progressDialog.isShowing)
                 progressDialog.dismiss()
         }
+    }
+
+    fun loadFragment(fragment: BaseFragment<*>){
+        val holder = placeHolder()
+        if (holder == 0){
+            eLog("=====Invalid placeHolder to load ${fragment::class.java.simpleName}=====")
+            return
+        }
+        eLog("Begin transaction")
+        val tr = supportFragmentManager.beginTransaction()
+        tr.add(holder, fragment, fragment::class.java.simpleName)
+        tr.commit()
     }
 }

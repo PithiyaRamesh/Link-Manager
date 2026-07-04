@@ -20,6 +20,10 @@ class WebViewActivity : BaseActivity() {
         intent.getSerializableData<LinkModel>(Commons.DATA_BUNDLE)
     }
 
+    override fun placeHolder(): Int {
+        return 0
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityWebviewBinding.inflate(layoutInflater)

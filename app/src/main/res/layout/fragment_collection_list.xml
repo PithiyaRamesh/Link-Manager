@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.HomeActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbarHeight"
+        android:elevation="@dimen/dp_5" />
+
+    <FrameLayout
+        android:id="@+id/banner_ad_top_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:translationZ="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerCollections"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/colorBgLayouts"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:paddingTop="2dp"
+        android:paddingBottom="@dimen/dp_70"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/banner_ad_top_container"
+        tools:itemCount="8"
+        tools:listitem="@layout/item_collection_vertical" />
+</androidx.constraintlayout.widget.ConstraintLayout>

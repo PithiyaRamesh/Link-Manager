@@ -15,6 +15,9 @@ import com.redvings.linkmanager.utils.Utils.Commons
 class SettingsActivity : BaseActivity(), View.OnClickListener {
     private lateinit var binding: ActivitySettingsBinding
 
+    override fun placeHolder(): Int {
+        return 0
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingsBinding.inflate(layoutInflater)
